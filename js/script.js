@@ -55,6 +55,7 @@ var showThree = () => {
     } else {
       numberToPush = generateRandomNumber();
     }
+  }
 
   for(let i = 0; i < arrayToShow.length; i++){
     document.getElementById(`productPic${i+1}`).setAttribute('src', `${allPics[arrayToShow[i]].filepath}`);
