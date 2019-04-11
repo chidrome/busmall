@@ -1,0 +1,16 @@
+
+.picContainer {
+  position: absolute;
+  display: inline-flex;
+  height: 150px;
+  align-content: center;
+  margin: auto;
+  top: 40%;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: scale-down;
+  padding-left: 100px;
+}
