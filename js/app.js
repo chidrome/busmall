@@ -2,7 +2,6 @@
 
 // Global variables
 var allPics = [];
-var displayedProducts = document.querySelectorAll('.pic');
 var totalClicks = 0;
 var clicks = [];
 var views = [];
@@ -12,6 +11,7 @@ var myChart;
 // html elements
 var lastPicked = document.getElementById('lastItem');
 var clicksLeft = document.getElementById('clicksLeft');
+var displayedProducts = document.querySelectorAll('.pic');
 
 
 // Create constructor function for the product
@@ -103,6 +103,7 @@ var handleClicks = (e) => {
   // remove the event listeners once 25 clicks has been made
   if(totalClicks === 25){
     removePicListeners();
+    storeToLocalStorage();
     return;
   }
   // show a new set of three once a product has been clicked
@@ -117,6 +118,19 @@ var generateRandomNumber = () => {
   return Math.floor(Math.random() * allPics.length);
 };
 
+// clear local storage data
+var clearData = () => {
+  localStorage.clear();
+  location.reload();
+};
+
+// store to local storage
+var storeToLocalStorage = () => {
+  localStorage.productNames = JSON.stringify(productNames);
+  localStorage.clicks = JSON.stringify(clicks);
+  localStorage.views = JSON.stringify(views);
+};
+
 //////////////////////////////////////////////////////////// Chart functions ////////////////////////////////////////////////////////////
 
 function updateChartArrays() {
@@ -128,16 +142,16 @@ function updateChartArrays() {
 }
 
 var data = {
-  labels: productNames,
+  labels: localStorage.length > 0 ? JSON.parse(localStorage.productNames) : productNames,
   datasets: [{
     type: 'bar',
     label: '# of clicks',
-    data: clicks,
+    data: localStorage.length > 0 ? JSON.parse(localStorage.clicks) : clicks,
     backgroundColor: '#c21d1d'
   },{
     type: 'bar',
     label: '# of views',
-    data: views,
+    data: localStorage.length > 0 ? JSON.parse(localStorage.views) : views,
     backgroundColor: '#76eb76'
   }]
 };
