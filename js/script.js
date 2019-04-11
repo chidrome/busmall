@@ -74,6 +74,13 @@ var addPicListeners = () => {
   }
 };
 
+// remove pic event listeners
+var removePicListeners = () => {
+  for(var i = 0; i < displayedProducts.length; i++) {
+    displayedProducts[i].removeEventListener('click', handleClicks);
+  }
+};
+
 // handle clicks
 var handleClicks = (e) => {
   // add a click to the object that's been clicked
@@ -81,6 +88,12 @@ var handleClicks = (e) => {
 
   // increase the total clicks by 1
   totalClicks++;
+  console.log(totalClicks);
+  // remove the event listeners once 25 clicks has been made
+  if(totalClicks === 25){
+    removePicListeners();
+    return;
+  }
 
   // show a new set of three once a product has been clicked
   showThree();
