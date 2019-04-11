@@ -14,3 +14,8 @@ img {
   object-fit: scale-down;
   padding-left: 100px;
 }
+
+#myChart {
+  width: 400px;
+  height: 400px;
+}
