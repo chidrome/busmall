@@ -3,6 +3,7 @@
 // Global variables
 var allPics = [];
 var displayedProducts = document.querySelectorAll('.pic');
+var totalClicks = 0;
 
 
 // Create constructor function for the product
@@ -38,13 +39,15 @@ new product('wine-glass');
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  ////////////////////////////// populate the products on the page //////////////////////////////
+  // populate the products on the page
   showThree();
   addPicListeners();
 
 });
 
-////////////////////////////// Helper Functions //////////////////////////////
+//////////////////////////////////////////////////////////// Helper Functions ////////////////////////////////////////////////////////////
+
+// show random three pictures
 var showThree = () => {
   let arrayToShow = [];
   var numberToPush = generateRandomNumber();
@@ -60,6 +63,7 @@ var showThree = () => {
   for(let i = 0; i < arrayToShow.length; i++){
     document.getElementById(`productPic${i+1}`).setAttribute('src', `${allPics[arrayToShow[i]].filepath}`);
     document.getElementById(`productPic${i+1}`).setAttribute('alt', `${allPics[arrayToShow[i]].name}`);
+    document.getElementById(`productPic${i+1}`).setAttribute('slot', `${arrayToShow[i]}`);
   }
 };
 
@@ -71,11 +75,18 @@ var addPicListeners = () => {
 };
 
 // handle clicks
-var handleClicks = () => {
+var handleClicks = (e) => {
+  // add a click to the object that's been clicked
+  allPics[parseInt(e.target.slot)].clicks++;
+
+  // increase the total clicks by 1
+  totalClicks++;
+
+  // show a new set of three once a product has been clicked
   showThree();
 };
 
-// generate a random number between 1 and 20
+// generate a random number between -1 and 20
 var generateRandomNumber = () => {
   return Math.floor(Math.random() * allPics.length);
 };
