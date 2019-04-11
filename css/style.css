@@ -21,3 +21,11 @@ img {
   width: auto;
   margin: auto;
 }
+
+#results {
+  position: relative;
+  height: 150px;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 30px;
+}

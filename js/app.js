@@ -9,6 +9,10 @@ var views = [];
 var productNames = [];
 var myChart;
 
+// html elements
+var lastPicked = document.getElementById('lastItem');
+var clicksLeft = document.getElementById('clicksLeft');
+
 
 // Create constructor function for the product
 function product(name){
@@ -91,22 +95,20 @@ var removePicListeners = () => {
 var handleClicks = (e) => {
   // add a click count to the object that's been clicked
   allPics[parseInt(e.target.slot)].clicks++;
-
   // increase the total clicks by 1
   totalClicks++;
+  lastPicked.innerHTML = e.target.alt;
+  clicksLeft.innerHTML = 25 - totalClicks;
   // remove the event listeners once 25 clicks has been made
   if(totalClicks === 25){
     removePicListeners();
     return;
   }
-
   // show a new set of three once a product has been clicked
   showThree();
+  // update chart
   updateChartArrays();
   myChart.update();
-  console.log(productNames);
-  console.log(clicks);
-  console.log(views);
 };
 
 // generate a random number between -1 and 20
@@ -125,7 +127,7 @@ function updateChartArrays() {
 }
 
 var data = {
-  labels: productNames, // titles array we declared earlier
+  labels: productNames,
   datasets: [{
     type: 'bar',
     label: '# of clicks',
