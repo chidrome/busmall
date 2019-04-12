@@ -7,6 +7,8 @@ var clicks = [];
 var views = [];
 var productNames = [];
 var myChart;
+var previousArray = [];
+
 
 // html elements
 var lastPicked = document.getElementById('lastItem');
@@ -63,12 +65,14 @@ var showThree = () => {
   var numberToPush = generateRandomNumber();
 
   while(arrayToShow.length !== 3){
-    if(numberToPush < 20 && arrayToShow.indexOf(numberToPush) === -1){
+    if(numberToPush < 20 && arrayToShow.indexOf(numberToPush) === -1 && previousArray.indexOf(numberToPush) === -1){
       arrayToShow.push(numberToPush);
     } else {
       numberToPush = generateRandomNumber();
     }
   }
+
+  previousArray = arrayToShow;
 
   for(let i = 0; i < arrayToShow.length; i++){
     document.getElementById(`productPic${i+1}`).setAttribute('src', `${allPics[arrayToShow[i]].filepath}`);
@@ -104,13 +108,15 @@ var handleClicks = (e) => {
   if(totalClicks === 25){
     removePicListeners();
     storeToLocalStorage();
+    myChart.update();
     return;
   }
+
+
   // show a new set of three once a product has been clicked
   showThree();
   // update chart
   updateChartArrays();
-  myChart.update();
 };
 
 // generate a random number between -1 and 20
