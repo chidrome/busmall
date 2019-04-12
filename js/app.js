@@ -17,7 +17,7 @@ var displayedProducts = document.querySelectorAll('.pic');
 
 
 // Create constructor function for the product
-function product(name){
+function Product(name){
   this.filepath = `assets/${name}.jpg`;
   this.name = name;
   this.views = 0;
@@ -25,26 +25,26 @@ function product(name){
   allPics.push(this);
 }
 
-new product('bag');
-new product('banana');
-new product('bathroom');
-new product('boots');
-new product('breakfast');
-new product('bubblegum');
-new product('chair');
-new product('cthulhu');
-new product('dog-duck');
-new product('dragon');
-new product('pen');
-new product('pet-sweep');
-new product('scissors');
-new product('shark');
-new product('sweep');
-new product('tauntaun');
-new product('unicorn');
-new product('usb');
-new product('water-can');
-new product('wine-glass');
+new Product('bag');
+new Product('banana');
+new Product('bathroom');
+new Product('boots');
+new Product('breakfast');
+new Product('bubblegum');
+new Product('chair');
+new Product('cthulhu');
+new Product('dog-duck');
+new Product('dragon');
+new Product('pen');
+new Product('pet-sweep');
+new Product('scissors');
+new Product('shark');
+new Product('sweep');
+new Product('tauntaun');
+new Product('unicorn');
+new Product('usb');
+new Product('water-can');
+new Product('wine-glass');
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // populate the products on the page
   showThree();
   addPicListeners();
-  drawChart();
-
 
 });
 
@@ -108,6 +106,7 @@ var handleClicks = (e) => {
   if(totalClicks === 25){
     removePicListeners();
     storeToLocalStorage();
+    drawChart();
     myChart.update();
     return;
   }
